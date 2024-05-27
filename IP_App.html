@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMS Data Display</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <h1 class="text-center">20S BMS Data Display</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="mt-4">Cell Voltages</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Cell</th>
+              <th>Voltage (V)</th>
+            </tr>
+          </thead>
+          <tbody id="cellData">
+            <!-- Cell data will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3 class="mt-4">BMS Temperature</h3>
+        <p id="bmsTemp">N/A</p>
+      </div>
+      <div class="col-md-6">
+        <h3 class="mt-4">Battery Temperature</h3>
+        <p id="batteryTemp">N/A</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Example data, replace this with actual data fetching logic
+    const cellVoltages = [
+      3.7, 3.65, 3.68, 3.7, 3.67, 3.69, 3.71, 3.65, 3.66, 3.67,
+      3.72, 3.68, 3.69, 3.7, 3.71, 3.72, 3.73, 3.74, 3.75, 3.76
+    ];
+    const bmsTemp = 25; // Example BMS temperature
+    const batteryTemp = 26; // Example Battery temperature
+
+    function updateDisplay() {
+      const cellDataElement = document.getElementById('cellData');
+      cellDataElement.innerHTML = '';
+      cellVoltages.forEach((voltage, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>Cell ${index + 1}</td><td>${voltage.toFixed(2)}</td>`;
+        cellDataElement.appendChild(row);
+      });
+
+      document.getElementById('bmsTemp').innerText = `${bmsTemp} °C`;
+      document.getElementById('batteryTemp').innerText = `${batteryTemp} °C`;
+    }
+
+    // Call updateDisplay to populate the UI with initial data
+    updateDisplay();
+  </script>
+</body>
+</html>
